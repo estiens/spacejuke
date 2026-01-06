@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Monitor, Zap, Shuffle, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import spaceTracks from "../../public/space_tracks.json";
+import spaceVideos from "../../public/space_videos.json";
 
 // Types
 interface SpaceTrack {
@@ -153,31 +155,17 @@ export default function Home() {
 
   // Load tracks on mount
   useEffect(() => {
-    // Load tracks
-    fetch("/space_tracks.json")
-      .then(res => res.json())
-      .then((data: SpaceTrack[]) => {
-        setTracks(data);
-        const randomTrack = data[Math.floor(Math.random() * data.length)];
-        setCurrentTrack(randomTrack);
-      })
-      .catch(err => {
-        console.error("Failed to load tracks:", err);
-      });
+    // Load tracks from imported JSON (bundled at build time)
+    setTracks(spaceTracks as SpaceTrack[]);
+    const randomTrack = spaceTracks[Math.floor(Math.random() * spaceTracks.length)] as SpaceTrack;
+    setCurrentTrack(randomTrack);
 
-    // Load videos
-    fetch("/space_videos.json")
-      .then(res => res.json())
-      .then((data: string[]) => {
-        if (data && data.length > 0) {
-          setVideoList(data);
-          setVideoSrc(data[Math.floor(Math.random() * data.length)]);
-        }
-      })
-      .catch(err => {
-        console.error("Failed to load videos:", err);
-      });
-    
+    // Load videos from imported JSON
+    if (spaceVideos && spaceVideos.length > 0) {
+      setVideoList(spaceVideos);
+      setVideoSrc(spaceVideos[Math.floor(Math.random() * spaceVideos.length)]);
+    }
+
     // Auto-hide controls
     const resetControlsTimer = () => {
       setShowControls(true);
