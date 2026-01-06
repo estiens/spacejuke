@@ -467,7 +467,8 @@ export default function Home() {
         
         {/* Credits Line */}
         <div className="bg-black/80 text-[10px] text-center py-1 text-white/30 font-space uppercase tracking-widest">
-          Audio: Archive.org (Grateful Dead) // Video: NASA Public Domain // Space Jukebox v4.2.0
+        I hope you always keep a don't-know mind, become clear like space, attain Enlightenment, and save all people from suffering // 
+          Audio: Archive.org // Video: NASA Public Domain // SpaceJuke v4.2.0
         </div>
       </div>
 
