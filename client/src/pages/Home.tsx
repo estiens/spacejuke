@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Monitor, Zap, Shuffle, Sparkles } from "lucide-react";
+import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Monitor, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import spaceTracks from "../../public/space_tracks.json";
 import spaceVideos from "../../public/space_videos.json";
@@ -134,26 +134,26 @@ export default function Home() {
           const p2 = (seed % 3 === 0) ? midsNorm : (seed % 3 === 1) ? highsNorm : bassNorm;
           const p3 = (seed % 3 === 0) ? highsNorm : (seed % 3 === 1) ? bassNorm : midsNorm;
 
-          const scale = 1.0 + (p1 * 0.25 * baseIntensity);
+          const scale = 1.0 + (p1 * 0.15 * baseIntensity);
           // Only cycle hue if intensity is high enough (> 0.5)
           const autoCycle = currentIntensity > 0.5 ? (timestamp / (250 / currentIntensity)) % 360 : 0;
-          const hueRotate = (p2 * 150 * baseIntensity) + autoCycle;
+          const hueRotate = (p2 * 120 * baseIntensity) + autoCycle;
 
-          const brightness = 1 + (p3 * 0.6 * baseIntensity);
-          const contrast = 1 + (p3 * 0.4 * baseIntensity);
-          const saturation = 1 + ((p1 + p2) * baseIntensity);
+          const brightness = 1 + (p3 * 0.4 * baseIntensity);
+          const contrast = 1 + (p3 * 0.3 * baseIntensity);
+          const saturation = 1 + ((p1 + p2) * 0.8 * baseIntensity);
 
-          // Apply glitch transform (less frequent, only on strong bass)
+          // Apply scale transform (glitch shake only on very strong bass, reduced intensity)
           let transform = `scale(${scale})`;
-          if (p1 > 0.7 && currentIntensity > 0.3) {
-             const shake = 15 * baseIntensity;
+          if (p1 > 0.8 && currentIntensity > 0.5) {
+             const shake = 8 * baseIntensity;
              const x = (Math.random() - 0.5) * shake;
              const y = (Math.random() - 0.5) * shake;
              transform += ` translate(${x}px, ${y}px)`;
           }
 
           videoRef.current.style.transform = transform;
-          // Removed blur() - it's extremely expensive on video elements
+          // No blur - it's extremely expensive on video elements
           videoRef.current.style.filter = `hue-rotate(${hueRotate}deg) brightness(${brightness}) contrast(${contrast}) saturate(${saturation})`;
         }
         animationRef.current = requestAnimationFrame(updateAnalysis);
@@ -343,7 +343,7 @@ export default function Home() {
             playsInline
             onLoadedData={handleVideoLoad}
             onError={handleVideoError}
-            className="h-full w-full object-cover transition-all duration-75 ease-out will-change-transform will-change-filter"
+            className="h-full w-full object-cover will-change-transform"
             style={{ transformOrigin: 'center center' }}
           />
         </div>

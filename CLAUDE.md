@@ -42,12 +42,18 @@ pnpm format       # Format code with Prettier
 - `client/public/space_videos.json` - NASA video URLs
 
 ### Visual Effects System (Home.tsx)
-The audio-reactive visuals use Web Audio API:
+The audio-reactive visuals use Web Audio API with optimized CSS transforms:
 1. `AudioContext` + `AnalyserNode` processes audio frequencies
-2. FFT data split into bass/mids/highs bands
+2. FFT data split into bass/mids/highs bands (pre-allocated arrays)
 3. Intensity slider (0-1) controls effect magnitude
-4. Effects include: hue rotation, scale, blur, shake/glitch transforms
+4. CSS filters applied via JavaScript (30fps throttled):
+   - Hue rotation (mids-driven + auto-cycle at high intensity)
+   - Saturation boost (bass+mids)
+   - Brightness/contrast (highs-driven)
+   - Scale transform (bass-driven)
+   - Glitch shake on strong bass hits
 5. `effectSeed` randomizes which frequency band drives which effect
+6. Note: WebGL effects (VFX-JS) don't work due to cross-origin video CORS restrictions
 
 ### UI Components
 Uses shadcn/ui (new-york style) with Radix primitives. Components in `client/src/components/ui/`.
@@ -59,8 +65,9 @@ Uses shadcn/ui (new-york style) with Radix primitives. Components in `client/src
 - Custom fonts: VT323 (pixelated), Space Mono
 
 ### Data Flow
-1. On mount, fetch tracks from `/space_tracks.json` and videos from `/space_videos.json`
+1. On mount, load tracks from bundled JSON and videos from bundled video list
 2. Random track selected, audio URL constructed from Archive.org pattern
 3. Audio plays through `<audio>` element connected to AnalyserNode
 4. Background `<video>` loops NASA footage
-5. `requestAnimationFrame` loop applies CSS transforms based on frequency data
+5. `requestAnimationFrame` loop (30fps throttled) analyzes audio frequencies
+6. CSS transforms/filters applied to video element based on frequency data
