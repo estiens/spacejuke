@@ -504,66 +504,67 @@ export default function Home() {
             </Button>
           </div>
 
-          {/* Right: Volume & Extras */}
-          <div className="flex items-center gap-4 flex-1 justify-end min-w-[200px]">
-            <div className="flex items-center gap-2 w-32 group">
-              <button onClick={toggleMute} className="text-white/60 hover:text-white transition-colors">
-                {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-              </button>
-              <Slider 
-                value={[isMuted ? 0 : volume]} 
-                max={1} 
-                step={0.01} 
-                onValueChange={(vals) => {
-                  setVolume(vals[0]);
-                  if (vals[0] > 0) setIsMuted(false);
-                }}
-                className="cursor-pointer opacity-50 group-hover:opacity-100 transition-opacity"
-              />
+          {/* Right: Volume, Intensity & Extras */}
+          <div className="flex items-center gap-2 md:gap-4 flex-1 justify-end min-w-[200px]">
+            {/* Volume + Intensity stacked on mobile, side-by-side on desktop */}
+            <div className="flex flex-col md:flex-row items-end md:items-center gap-2 md:gap-4">
+              {/* Volume */}
+              <div className="flex items-center gap-2 w-24 md:w-32 group">
+                <button onClick={toggleMute} className="text-white/60 hover:text-white transition-colors">
+                  {isMuted ? <VolumeX className="h-4 w-4 md:h-5 md:w-5" /> : <Volume2 className="h-4 w-4 md:h-5 md:w-5" />}
+                </button>
+                <Slider
+                  value={[isMuted ? 0 : volume]}
+                  max={1}
+                  step={0.01}
+                  onValueChange={(vals) => {
+                    setVolume(vals[0]);
+                    if (vals[0] > 0) setIsMuted(false);
+                  }}
+                  className="cursor-pointer opacity-70 group-hover:opacity-100 transition-opacity"
+                />
+              </div>
+
+              {/* Intensity - visible on all sizes */}
+              <div className="flex items-center gap-2 w-24 md:w-32">
+                <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-white/60" />
+                <Slider
+                  value={[intensity]}
+                  max={1}
+                  step={0.05}
+                  onValueChange={(val) => setIntensity(val[0])}
+                  className="cursor-pointer flex-1"
+                />
+              </div>
             </div>
 
-            <div className="h-8 w-[1px] bg-white/20 mx-2" />
+            <div className="h-8 w-[1px] bg-white/20 mx-1 md:mx-2 hidden md:block" />
 
-            <div className="flex items-center gap-2 border-l border-white/10 pl-4 ml-2">
+            <div className="flex items-center gap-1 md:gap-2 border-l border-white/10 pl-2 md:pl-4 ml-1 md:ml-2">
               <div className="flex flex-col items-center">
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="text-white/60 hover:text-white hover:bg-white/10 active:scale-95 transition-transform"
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white/60 hover:text-white hover:bg-white/10 active:scale-95 transition-transform h-8 w-8 md:h-10 md:w-10"
                   onClick={randomizeEffects}
                   title="Change Visual Effects"
                 >
-                  <Sparkles className="h-5 w-5" />
+                  <Sparkles className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
-                <span className="text-[10px] uppercase tracking-wider text-white/40 mt-1">Change EFX</span>
-              </div>
-
-              <div className="flex flex-col items-center px-2 hidden md:flex">
-                <div className="w-32 h-9 flex items-center gap-2">
-                  <span className="text-[10px] text-white/40">OFF</span>
-                  <Slider
-                    value={[intensity]}
-                    max={1}
-                    step={0.05}
-                    onValueChange={(val) => setIntensity(val[0])}
-                    className="cursor-pointer flex-1"
-                  />
-                  <span className="text-[10px] text-white/40">MAX</span>
-                </div>
-                <span className="text-[10px] uppercase tracking-wider text-white/40 mt-1">Intensity</span>
+                <span className="text-[8px] md:text-[10px] uppercase tracking-wider text-white/40 mt-1">EFX</span>
               </div>
 
               <div className="flex flex-col items-center">
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="text-white/60 hover:text-white hover:bg-white/10 active:scale-95 transition-transform"
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white/60 hover:text-white hover:bg-white/10 active:scale-95 transition-transform h-8 w-8 md:h-10 md:w-10"
                   onClick={changeVideo}
                   title="Switch Background Video"
                 >
-                  <Monitor className="h-5 w-5" />
+                  <Monitor className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
-                <span className="text-[10px] uppercase tracking-wider text-white/40 mt-1">Scene</span>
+                <span className="text-[8px] md:text-[10px] uppercase tracking-wider text-white/40 mt-1">Scene</span>
               </div>
             </div>
           </div>
