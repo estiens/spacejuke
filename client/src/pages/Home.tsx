@@ -59,6 +59,12 @@ export default function Home() {
   const animationRef = useRef<number>(0);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Performance optimization refs
+  const dataArrayRef = useRef<Uint8Array | null>(null);
+  const lastFrameTimeRef = useRef<number>(0);
+  const lastMouseMoveRef = useRef<number>(0);
+  const showControlsRef = useRef<boolean>(true);
+
   // Initialize Audio Context
   const initAudioContext = () => {
     if (!audioContextRef.current && audioRef.current) {
@@ -79,22 +85,34 @@ export default function Home() {
         }
       }
       
-      // Start analysis loop
-      const updateAnalysis = () => {
-        if (analyserRef.current && videoRef.current) {
-          const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
-          analyserRef.current.getByteFrequencyData(dataArray);
-          
-          // Calculate energy bands
-          const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
-          const mids = dataArray.slice(20, 100).reduce((a, b) => a + b, 0) / 80;
-          const highs = dataArray.slice(100, 200).reduce((a, b) => a + b, 0) / 100;
-          
+      // Pre-allocate data array for performance
+      dataArrayRef.current = new Uint8Array(analyserRef.current.frequencyBinCount);
+
+      // Start analysis loop (throttled to ~30fps for performance)
+      const updateAnalysis = (timestamp: number) => {
+        // Throttle to ~30fps (33ms between frames)
+        if (timestamp - lastFrameTimeRef.current < 33) {
+          animationRef.current = requestAnimationFrame(updateAnalysis);
+          return;
+        }
+        lastFrameTimeRef.current = timestamp;
+
+        if (analyserRef.current && videoRef.current && dataArrayRef.current) {
+          analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+
+          // Calculate energy bands without creating new arrays
+          let bass = 0, mids = 0, highs = 0;
+          const data = dataArrayRef.current;
+          for (let i = 0; i < 10; i++) bass += data[i];
+          for (let i = 20; i < 100; i++) mids += data[i];
+          for (let i = 100; i < 200; i++) highs += data[i];
+          bass /= 10; mids /= 80; highs /= 100;
+
           // Normalize values (0 to 1)
           const bassNorm = bass / 255;
           const midsNorm = mids / 255;
           const highsNorm = highs / 255;
-          
+
           // Effects Logic
           const currentIntensity = intensityRef.current;
           const currentSeed = effectSeedRef.current;
@@ -108,46 +126,39 @@ export default function Home() {
           }
 
           // Intensity 1 means MAX effects (equivalent to old Trip Mode)
-          const baseIntensity = currentIntensity * 3.0; // Scale up so 1.0 is intense
-          
+          const baseIntensity = currentIntensity * 2.5;
+
           // Randomize effect mapping based on seed
           const seed = currentSeed;
           const p1 = (seed % 3 === 0) ? bassNorm : (seed % 3 === 1) ? midsNorm : highsNorm;
           const p2 = (seed % 3 === 0) ? midsNorm : (seed % 3 === 1) ? highsNorm : bassNorm;
           const p3 = (seed % 3 === 0) ? highsNorm : (seed % 3 === 1) ? bassNorm : midsNorm;
 
-          const scale = 1.0 + (p1 * 0.3 * baseIntensity);
+          const scale = 1.0 + (p1 * 0.25 * baseIntensity);
           // Only cycle hue if intensity is high enough (> 0.5)
-          const autoCycle = currentIntensity > 0.5 ? (Date.now() / (200 / currentIntensity)) % 360 : 0;
-          const hueRotate = (p2 * 180 * baseIntensity) + autoCycle;
-          
-          const brightness = 1 + (p3 * 0.8 * baseIntensity);
-          const contrast = 1 + (p3 * 0.6 * baseIntensity);
-          const saturation = 1 + ((p1 + p2) * 1.5 * baseIntensity);
-          const blur = (p3 * 8 * baseIntensity * currentIntensity); // Blur scales with intensity
+          const autoCycle = currentIntensity > 0.5 ? (timestamp / (250 / currentIntensity)) % 360 : 0;
+          const hueRotate = (p2 * 150 * baseIntensity) + autoCycle;
 
-          // Apply glitch transform
+          const brightness = 1 + (p3 * 0.6 * baseIntensity);
+          const contrast = 1 + (p3 * 0.4 * baseIntensity);
+          const saturation = 1 + ((p1 + p2) * baseIntensity);
+
+          // Apply glitch transform (less frequent, only on strong bass)
           let transform = `scale(${scale})`;
-          if (p1 > 0.6 && currentIntensity > 0.2) { 
-             const shake = 20 * baseIntensity;
+          if (p1 > 0.7 && currentIntensity > 0.3) {
+             const shake = 15 * baseIntensity;
              const x = (Math.random() - 0.5) * shake;
              const y = (Math.random() - 0.5) * shake;
-             const rotate = (Math.random() - 0.5) * 5 * baseIntensity;
-             transform += ` translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+             transform += ` translate(${x}px, ${y}px)`;
           }
-          
+
           videoRef.current.style.transform = transform;
-          videoRef.current.style.filter = `
-            hue-rotate(${hueRotate}deg) 
-            brightness(${brightness}) 
-            contrast(${contrast}) 
-            saturate(${saturation})
-            blur(${blur}px)
-          `;
+          // Removed blur() - it's extremely expensive on video elements
+          videoRef.current.style.filter = `hue-rotate(${hueRotate}deg) brightness(${brightness}) contrast(${contrast}) saturate(${saturation})`;
         }
         animationRef.current = requestAnimationFrame(updateAnalysis);
       };
-      updateAnalysis();
+      animationRef.current = requestAnimationFrame(updateAnalysis);
     } else if (audioContextRef.current?.state === 'suspended') {
       audioContextRef.current.resume();
     }
@@ -166,16 +177,29 @@ export default function Home() {
       setVideoSrc(spaceVideos[Math.floor(Math.random() * spaceVideos.length)]);
     }
 
-    // Auto-hide controls
+    // Auto-hide controls (throttled to avoid constant re-renders)
     const resetControlsTimer = () => {
-      setShowControls(true);
+      const now = Date.now();
+      // Throttle mousemove to max once per 100ms
+      if (now - lastMouseMoveRef.current < 100) return;
+      lastMouseMoveRef.current = now;
+
+      // Only trigger React state update if controls aren't already showing
+      if (!showControlsRef.current) {
+        setShowControls(true);
+        showControlsRef.current = true;
+      }
+
       if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
-      controlsTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
+      controlsTimeoutRef.current = setTimeout(() => {
+        setShowControls(false);
+        showControlsRef.current = false;
+      }, 3000);
     };
 
-    window.addEventListener('mousemove', resetControlsTimer);
+    window.addEventListener('mousemove', resetControlsTimer, { passive: true });
     window.addEventListener('click', resetControlsTimer);
-    
+
     return () => {
       window.removeEventListener('mousemove', resetControlsTimer);
       window.removeEventListener('click', resetControlsTimer);
