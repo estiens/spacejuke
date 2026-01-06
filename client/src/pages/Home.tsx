@@ -72,7 +72,7 @@ export default function Home() {
       audioContextRef.current = new AudioContext();
       analyserRef.current = audioContextRef.current.createAnalyser();
       analyserRef.current.fftSize = 512;
-      analyserRef.current.smoothingTimeConstant = 0.8;
+      analyserRef.current.smoothingTimeConstant = 0.5; // Lower = more reactive to audio
       
       // Connect audio element to analyser and destination
       if (!sourceRef.current) {
@@ -134,19 +134,19 @@ export default function Home() {
           const p2 = (seed % 3 === 0) ? midsNorm : (seed % 3 === 1) ? highsNorm : bassNorm;
           const p3 = (seed % 3 === 0) ? highsNorm : (seed % 3 === 1) ? bassNorm : midsNorm;
 
-          const scale = 1.0 + (p1 * 0.15 * baseIntensity);
+          const scale = 1.0 + (p1 * 0.25 * baseIntensity);
           // Only cycle hue if intensity is high enough (> 0.5)
           const autoCycle = currentIntensity > 0.5 ? (timestamp / (250 / currentIntensity)) % 360 : 0;
-          const hueRotate = (p2 * 120 * baseIntensity) + autoCycle;
+          const hueRotate = (p2 * 150 * baseIntensity) + autoCycle;
 
-          const brightness = 1 + (p3 * 0.4 * baseIntensity);
-          const contrast = 1 + (p3 * 0.3 * baseIntensity);
-          const saturation = 1 + ((p1 + p2) * 0.8 * baseIntensity);
+          const brightness = 1 + (p3 * 0.6 * baseIntensity);
+          const contrast = 1 + (p3 * 0.4 * baseIntensity);
+          const saturation = 1 + ((p1 + p2) * baseIntensity);
 
-          // Apply scale transform (glitch shake only on very strong bass, reduced intensity)
+          // Apply scale transform + glitch shake on strong bass
           let transform = `scale(${scale})`;
-          if (p1 > 0.8 && currentIntensity > 0.5) {
-             const shake = 8 * baseIntensity;
+          if (p1 > 0.7 && currentIntensity > 0.3) {
+             const shake = 15 * baseIntensity;
              const x = (Math.random() - 0.5) * shake;
              const y = (Math.random() - 0.5) * shake;
              transform += ` translate(${x}px, ${y}px)`;
