@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Play, Pause, SkipForward, SkipBack, Volume2, VolumeX, Monitor, Sparkles } from "lucide-react";
@@ -16,10 +16,36 @@ interface SpaceTrack {
 }
 
 // Fallback video if JSON fails to load
-const FALLBACK_VIDEO = "https://ia801907.us.archive.org/28/items/ISSVideoResourceEarthViews720p/ISS%20Video%20Resource_Earth%20Views_720p.mp4";
+const FALLBACK_VIDEO = "https://ia801907.us.archive.org/28/items/ISSVideoResourceEarthViews720p/ISS%20Video%20Resource_Earth_Views_720p.mp4";
 
 // Fallback background image
 const FALLBACK_BG = "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2072&auto=format&fit=crop";
+
+// SVG Filters for GPU-accelerated effects (no CORS issues)
+const SVGFilters = () => (
+  <svg width="0" height="0" style={{ position: 'absolute' }}>
+    <defs>
+      {/* Displacement/glitch filter using procedural noise */}
+      <filter id="glitch" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="1" seed="1" result="noise"/>
+        <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+        <feDisplacementMap in="SourceGraphic" in2="mono" scale="0" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+        <feColorMatrix in="displaced" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+      </filter>
+
+      {/* Color channel separation filters for chromatic aberration */}
+      <filter id="rgb-r">
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="rgb-g">
+        <feColorMatrix type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="rgb-b">
+        <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+      </filter>
+    </defs>
+  </svg>
+);
 
 export default function Home() {
   const [tracks, setTracks] = useState<SpaceTrack[]>([]);
@@ -53,6 +79,7 @@ export default function Home() {
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
@@ -61,19 +88,121 @@ export default function Home() {
 
   // Performance optimization refs
   const dataArrayRef = useRef<Uint8Array | null>(null);
-  const lastFrameTimeRef = useRef<number>(0);
   const lastMouseMoveRef = useRef<number>(0);
   const showControlsRef = useRef<boolean>(true);
+  const isAnalysisRunning = useRef<boolean>(false);
+
+  // Update CSS variables for video effects (called per video frame)
+  const updateEffects = useCallback((now: number) => {
+    if (!analyserRef.current || !dataArrayRef.current || !videoContainerRef.current) return;
+
+    analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+
+    // Calculate energy bands without creating new arrays
+    let bass = 0, mids = 0, highs = 0;
+    const data = dataArrayRef.current;
+    for (let i = 0; i < 10; i++) bass += data[i];
+    for (let i = 20; i < 100; i++) mids += data[i];
+    for (let i = 100; i < 200; i++) highs += data[i];
+    bass /= 10; mids /= 80; highs /= 100;
+
+    // Normalize values (0 to 1)
+    const bassNorm = bass / 255;
+    const midsNorm = mids / 255;
+    const highsNorm = highs / 255;
+
+    const currentIntensity = intensityRef.current;
+    const currentSeed = effectSeedRef.current;
+    const container = videoContainerRef.current;
+
+    // STRICT OFF CHECK: If intensity is 0, reset all CSS vars
+    if (currentIntensity === 0) {
+      container.style.setProperty('--vfx-scale', '1');
+      container.style.setProperty('--vfx-hue', '0deg');
+      container.style.setProperty('--vfx-brightness', '1');
+      container.style.setProperty('--vfx-contrast', '1');
+      container.style.setProperty('--vfx-saturate', '1');
+      container.style.setProperty('--vfx-tx', '0px');
+      container.style.setProperty('--vfx-ty', '0px');
+      return;
+    }
+
+    // Intensity 1 means MAX effects
+    const baseIntensity = currentIntensity * 2.5;
+
+    // Randomize effect mapping based on seed
+    const seed = currentSeed;
+    const p1 = (seed % 3 === 0) ? bassNorm : (seed % 3 === 1) ? midsNorm : highsNorm;
+    const p2 = (seed % 3 === 0) ? midsNorm : (seed % 3 === 1) ? highsNorm : bassNorm;
+    const p3 = (seed % 3 === 0) ? highsNorm : (seed % 3 === 1) ? bassNorm : midsNorm;
+
+    const scale = 1.0 + (p1 * 0.25 * baseIntensity);
+    const autoCycle = currentIntensity > 0.5 ? (now / (250 / currentIntensity)) % 360 : 0;
+    const hueRotate = (p2 * 150 * baseIntensity) + autoCycle;
+    const brightness = 1 + (p3 * 0.6 * baseIntensity);
+    const contrast = 1 + (p3 * 0.4 * baseIntensity);
+    const saturation = 1 + ((p1 + p2) * baseIntensity);
+
+    // Glitch shake on strong bass
+    let tx = 0, ty = 0;
+    if (p1 > 0.7 && currentIntensity > 0.3) {
+      const shake = 15 * baseIntensity;
+      tx = (Math.random() - 0.5) * shake;
+      ty = (Math.random() - 0.5) * shake;
+    }
+
+    // Set CSS variables (minimal style writes - just updating values)
+    container.style.setProperty('--vfx-scale', scale.toString());
+    container.style.setProperty('--vfx-hue', `${hueRotate}deg`);
+    container.style.setProperty('--vfx-brightness', brightness.toString());
+    container.style.setProperty('--vfx-contrast', contrast.toString());
+    container.style.setProperty('--vfx-saturate', saturation.toString());
+    container.style.setProperty('--vfx-tx', `${tx}px`);
+    container.style.setProperty('--vfx-ty', `${ty}px`);
+  }, []);
+
+  // Start the video frame callback loop
+  const startVideoFrameLoop = useCallback(() => {
+    if (!videoRef.current || isAnalysisRunning.current) return;
+    isAnalysisRunning.current = true;
+
+    // Use requestVideoFrameCallback if available (syncs to video frames)
+    // Falls back to requestAnimationFrame
+    const hasRVFC = 'requestVideoFrameCallback' in HTMLVideoElement.prototype;
+
+    if (hasRVFC) {
+      const onVideoFrame = (now: number) => {
+        updateEffects(now);
+        if (videoRef.current && isAnalysisRunning.current) {
+          (videoRef.current as any).requestVideoFrameCallback(onVideoFrame);
+        }
+      };
+      (videoRef.current as any).requestVideoFrameCallback(onVideoFrame);
+    } else {
+      // Fallback to rAF throttled to ~30fps
+      let lastTime = 0;
+      const onFrame = (now: number) => {
+        if (now - lastTime >= 33) {
+          updateEffects(now);
+          lastTime = now;
+        }
+        if (isAnalysisRunning.current) {
+          animationRef.current = requestAnimationFrame(onFrame);
+        }
+      };
+      animationRef.current = requestAnimationFrame(onFrame);
+    }
+  }, [updateEffects]);
 
   // Initialize Audio Context
-  const initAudioContext = () => {
+  const initAudioContext = useCallback(() => {
     if (!audioContextRef.current && audioRef.current) {
       const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
       audioContextRef.current = new AudioContext();
       analyserRef.current = audioContextRef.current.createAnalyser();
       analyserRef.current.fftSize = 512;
-      analyserRef.current.smoothingTimeConstant = 0.5; // Lower = more reactive to audio
-      
+      analyserRef.current.smoothingTimeConstant = 0.5; // Lower = more reactive
+
       // Connect audio element to analyser and destination
       if (!sourceRef.current) {
         try {
@@ -84,85 +213,16 @@ export default function Home() {
           console.error("Audio context connection error:", e);
         }
       }
-      
+
       // Pre-allocate data array for performance
       dataArrayRef.current = new Uint8Array(analyserRef.current.frequencyBinCount);
 
-      // Start analysis loop (throttled to ~30fps for performance)
-      const updateAnalysis = (timestamp: number) => {
-        // Throttle to ~30fps (33ms between frames)
-        if (timestamp - lastFrameTimeRef.current < 33) {
-          animationRef.current = requestAnimationFrame(updateAnalysis);
-          return;
-        }
-        lastFrameTimeRef.current = timestamp;
-
-        if (analyserRef.current && videoRef.current && dataArrayRef.current) {
-          analyserRef.current.getByteFrequencyData(dataArrayRef.current);
-
-          // Calculate energy bands without creating new arrays
-          let bass = 0, mids = 0, highs = 0;
-          const data = dataArrayRef.current;
-          for (let i = 0; i < 10; i++) bass += data[i];
-          for (let i = 20; i < 100; i++) mids += data[i];
-          for (let i = 100; i < 200; i++) highs += data[i];
-          bass /= 10; mids /= 80; highs /= 100;
-
-          // Normalize values (0 to 1)
-          const bassNorm = bass / 255;
-          const midsNorm = mids / 255;
-          const highsNorm = highs / 255;
-
-          // Effects Logic
-          const currentIntensity = intensityRef.current;
-          const currentSeed = effectSeedRef.current;
-
-          // STRICT OFF CHECK: If intensity is 0, disable all effects immediately
-          if (currentIntensity === 0) {
-            videoRef.current.style.transform = 'none';
-            videoRef.current.style.filter = 'none';
-            animationRef.current = requestAnimationFrame(updateAnalysis);
-            return;
-          }
-
-          // Intensity 1 means MAX effects (equivalent to old Trip Mode)
-          const baseIntensity = currentIntensity * 2.5;
-
-          // Randomize effect mapping based on seed
-          const seed = currentSeed;
-          const p1 = (seed % 3 === 0) ? bassNorm : (seed % 3 === 1) ? midsNorm : highsNorm;
-          const p2 = (seed % 3 === 0) ? midsNorm : (seed % 3 === 1) ? highsNorm : bassNorm;
-          const p3 = (seed % 3 === 0) ? highsNorm : (seed % 3 === 1) ? bassNorm : midsNorm;
-
-          const scale = 1.0 + (p1 * 0.25 * baseIntensity);
-          // Only cycle hue if intensity is high enough (> 0.5)
-          const autoCycle = currentIntensity > 0.5 ? (timestamp / (250 / currentIntensity)) % 360 : 0;
-          const hueRotate = (p2 * 150 * baseIntensity) + autoCycle;
-
-          const brightness = 1 + (p3 * 0.6 * baseIntensity);
-          const contrast = 1 + (p3 * 0.4 * baseIntensity);
-          const saturation = 1 + ((p1 + p2) * baseIntensity);
-
-          // Apply scale transform + glitch shake on strong bass
-          let transform = `scale(${scale})`;
-          if (p1 > 0.7 && currentIntensity > 0.3) {
-             const shake = 15 * baseIntensity;
-             const x = (Math.random() - 0.5) * shake;
-             const y = (Math.random() - 0.5) * shake;
-             transform += ` translate(${x}px, ${y}px)`;
-          }
-
-          videoRef.current.style.transform = transform;
-          // No blur - it's extremely expensive on video elements
-          videoRef.current.style.filter = `hue-rotate(${hueRotate}deg) brightness(${brightness}) contrast(${contrast}) saturate(${saturation})`;
-        }
-        animationRef.current = requestAnimationFrame(updateAnalysis);
-      };
-      animationRef.current = requestAnimationFrame(updateAnalysis);
+      // Start video frame loop
+      startVideoFrameLoop();
     } else if (audioContextRef.current?.state === 'suspended') {
       audioContextRef.current.resume();
     }
-  };
+  }, [startVideoFrameLoop]);
 
   // Load tracks on mount
   useEffect(() => {
@@ -205,6 +265,7 @@ export default function Home() {
       window.removeEventListener('click', resetControlsTimer);
       if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      isAnalysisRunning.current = false;
     };
   }, []);
 
@@ -322,18 +383,37 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black font-vt323 text-white selection:bg-primary selection:text-white">
+      {/* SVG Filters for GPU-accelerated effects */}
+      <SVGFilters />
+
       {/* Fallback Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ backgroundImage: `url(${FALLBACK_BG})` }}
       />
 
-      {/* Background Video */}
+      {/* Background Video with CSS Variable-driven effects */}
       {!useStaticBackground && (
-        <div className={cn(
-          "absolute inset-0 overflow-hidden z-1 transition-opacity duration-1000",
-          videoLoaded ? "opacity-100" : "opacity-0"
-        )}>
+        <div
+          ref={videoContainerRef}
+          className={cn(
+            "absolute inset-0 overflow-hidden z-1 transition-opacity duration-1000",
+            videoLoaded ? "opacity-100" : "opacity-0"
+          )}
+          style={{
+            // CSS variables for effects (updated by JS)
+            ['--vfx-scale' as string]: '1',
+            ['--vfx-hue' as string]: '0deg',
+            ['--vfx-brightness' as string]: '1',
+            ['--vfx-contrast' as string]: '1',
+            ['--vfx-saturate' as string]: '1',
+            ['--vfx-tx' as string]: '0px',
+            ['--vfx-ty' as string]: '0px',
+            // Isolate this layer from the rest of the page
+            contain: 'paint layout',
+            isolation: 'isolate',
+          }}
+        >
           <video
             ref={videoRef}
             src={videoSrc}
@@ -343,8 +423,14 @@ export default function Home() {
             playsInline
             onLoadedData={handleVideoLoad}
             onError={handleVideoError}
-            className="h-full w-full object-cover will-change-transform"
-            style={{ transformOrigin: 'center center' }}
+            className="h-full w-full object-cover"
+            style={{
+              transformOrigin: 'center center',
+              // Use CSS variables for transforms and filters
+              transform: 'scale(var(--vfx-scale)) translate(var(--vfx-tx), var(--vfx-ty))',
+              filter: 'hue-rotate(var(--vfx-hue)) brightness(var(--vfx-brightness)) contrast(var(--vfx-contrast)) saturate(var(--vfx-saturate))',
+              willChange: 'transform, filter',
+            }}
           />
         </div>
       )}
@@ -353,12 +439,18 @@ export default function Home() {
       <div className="crt-overlay absolute inset-0 z-10 opacity-30 pointer-events-none" />
       <div className="scanline z-10 opacity-20 pointer-events-none" />
       
-      {/* Top HUD Bar */}
-      <div 
+      {/* Top HUD Bar - isolated layer for smooth UI */}
+      <div
         className={cn(
           "absolute top-0 left-0 right-0 z-50 transition-transform duration-500 ease-in-out",
           showControls ? "translate-y-0" : "-translate-y-full"
         )}
+        style={{
+          // Force own compositor layer - prevents video effects from blocking UI
+          transform: showControls ? 'translateY(0) translateZ(0)' : 'translateY(-100%) translateZ(0)',
+          backfaceVisibility: 'hidden',
+          willChange: 'transform',
+        }}
       >
         <div className="bg-black/60 backdrop-blur-md border-b border-white/10 p-4 flex flex-col md:flex-row items-center justify-between gap-4">
           
