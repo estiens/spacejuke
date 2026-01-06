@@ -1,0 +1,815 @@
+
+[
+  {
+    "identifier": "gd78-10-21.sbd.popi.6100.sbeok.shnf",
+    "date": "1978-10-21",
+    "venue": "Winterland Arena",
+    "location": "San Francisco, CA",
+    "filename": "gd78-10-21d3t02.mp3"
+  },
+  {
+    "identifier": "gd94-03-21.sbd.ladner.6258.sbeok.shnf",
+    "date": "1994-03-21",
+    "venue": "Richfield Coliseum",
+    "location": "Richfield, OH",
+    "filename": "gd94-03-21d3t01.mp3"
+  },
+  {
+    "identifier": "gd1989-04-02.135453.mtx.tobin.flac16",
+    "date": "1989-04-02",
+    "venue": "Civic Arena",
+    "location": "Pittsburgh, PA",
+    "filename": "gd1989-04-02d3t01.mp3"
+  },
+  {
+    "identifier": "gd1985-03-29.165161.nak304.thomas.miller.clugston.flac1648",
+    "date": "1985-03-29",
+    "venue": "Nassau Veterans Memorial Coliseum",
+    "location": "Uniondale, NY",
+    "filename": "gd85-03-29 s2t07 Space.mp3"
+  },
+  {
+    "identifier": "gd91-06-20.aud.ladner.2187.sbeok.shnf",
+    "date": "1991-06-20",
+    "venue": "Pine Knob Music Theater",
+    "location": "Clarkston, MI",
+    "filename": "gd91-06-20d3t02.mp3"
+  },
+  {
+    "identifier": "gd1982-07-29.167265.2nd.set.excerpt.sbd.eaton.clugston.flac1648",
+    "date": "1982-07-29",
+    "venue": "Red Rocks Amphitheatre",
+    "location": "Morrison, CO",
+    "filename": "gd82-07-29 s2t04 Space_Other One Space.mp3"
+  },
+  {
+    "identifier": "gd1982-08-01.138679.nak300.holbrook.flac1644",
+    "date": "1982-08-01",
+    "venue": "Zoo Amphitheater",
+    "location": "Oklahoma City, OK",
+    "filename": "gd1982-08-01nak300.16d2t06.mp3"
+  },
+  {
+    "identifier": "gd1982-10-09.167454.shure.sm57.kelley.miller.clugston.flac1648",
+    "date": "1982-10-09",
+    "venue": "Frost Amphitheatre",
+    "location": "Palo Alto, CA",
+    "filename": "gd82-10-09 s2t07 Space.mp3"
+  },
+  {
+    "identifier": "gd1985-03-27.140844.s2.unkown.Bryant.Miller.Noel.t-flac2496",
+    "date": "1985-03-27",
+    "venue": "Nassau Coliseum",
+    "location": "Uniondale, NY",
+    "filename": "gd85-03-27.s2t06.mp3"
+  },
+  {
+    "identifier": "gd1985-04-01.141210.s2.unknown.Bryant.Miller.Noel.t-flac1644",
+    "date": "1985-04-01",
+    "venue": "Cumberland County Civic Center",
+    "location": "Portland, ME",
+    "filename": "gd85-04-01.s2t07.mp3"
+  },
+  {
+    "identifier": "gd1985-04-07.169900.sbd.patched.pitched.remaster.sacks.keith.miksis.flac1648",
+    "date": "1985-04-07",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "s2t06 - Space.mp3"
+  },
+  {
+    "identifier": "gd1985-10-26.154871.senn.me80.hessberg.miller.clugston.flac2496",
+    "date": "1985-10-26",
+    "venue": "Sun Dome",
+    "location": "Tampa, FL",
+    "filename": "gd85-10-26 s2t08 Space.mp3"
+  },
+  {
+    "identifier": "gd1986-02-12.159380.mtx.tobin.flac16",
+    "date": "1986-02-12",
+    "venue": "Henry J. Kaiser Convention Center",
+    "location": "Oakland, CA",
+    "filename": "12 Space.mp3"
+  },
+  {
+    "identifier": "gd1987-03-23.akg451.scarletdog.126162.flac16",
+    "date": "1987-03-23",
+    "venue": "Hampton Coliseum",
+    "location": "Hampton, VA",
+    "filename": "gd1987-03-23.akg451.scarletdog.126162.t17.mp3"
+  },
+  {
+    "identifier": "gd1987-03-30.167564.senn441.lamarre.miller.clugston.flac1648",
+    "date": "1987-03-30",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "gd87-03-30 s2t06 Space.mp3"
+  },
+  {
+    "identifier": "gd1987-04-19.151130.aud.lohr.vernon.flac2496",
+    "date": "1987-04-19",
+    "venue": "Irvine Meadows",
+    "location": "Irvine, CA",
+    "filename": "18. Space >.mp3"
+  },
+  {
+    "identifier": "gd1988-04-30.141810.FOB.NAK.Anon.Noel.t-flac2496",
+    "date": "1988-04-30",
+    "venue": "Frost Amphitheatre",
+    "location": "Palo Alto, CA",
+    "filename": "gd88-04-30.s2t07.mp3"
+  },
+  {
+    "identifier": "gd1989-04-13.156415.OTS-Schoeps-PCM-Master-Mattes-Anon-Noel.t-flac16",
+    "date": "1989-04-13",
+    "venue": "Rosemont Horizon",
+    "location": "Rosemont, IL",
+    "filename": "gd89-04-13.s2t06.mp3"
+  },
+  {
+    "identifier": "gd1989-10-23.nak300.holtz.lmpp.96922.flac16",
+    "date": "1989-10-23",
+    "venue": "Charlotte Coliseum",
+    "location": "Charlotte, NC",
+    "filename": "gd1989-10-23d3t01.mp3"
+  },
+  {
+    "identifier": "gd1989-12-28.140421.fob.AA.toak1.flac1644",
+    "date": "1989-12-28",
+    "venue": "Oakland-Alameda County Coliseum",
+    "location": "Oakland, CA",
+    "filename": "gd1989-12-28-set2-AA-fob-toaK1-06.mp3"
+  },
+  {
+    "identifier": "gd1989-12-30.131029.cmc521.fob.deal.jwpetty.flac16",
+    "date": "1989-12-30",
+    "venue": "Oakland-Alameda County Coliseum",
+    "location": "Oakland, CA",
+    "filename": "gd1989-12-30.set2t08.mp3"
+  },
+  {
+    "identifier": "gd1990-03-21.141930.OTS.Schoeps.Mattes.Miller.Noel.t-flac1648",
+    "date": "1990-03-21",
+    "venue": "Copps Coliseum",
+    "location": "Hamilton, ON",
+    "filename": "gd90-03-21.s2t08.mp3"
+  },
+  {
+    "identifier": "gd1990-06-16.Nak300CP4.Fitzy.Keo.126272.Flac2496",
+    "date": "1990-06-16",
+    "venue": "Shoreline Amphitheatre",
+    "location": "Mountain View, CA",
+    "filename": "gd1990-06-16.Nak300.t16.mp3"
+  },
+  {
+    "identifier": "gd1990-06-23.163868.nak700.severson.miller.clugston.flac2496",
+    "date": "1990-06-23",
+    "venue": "Autzen Stadium, U. of Oregon",
+    "location": "Eugene, OR",
+    "filename": "gd90-06-23 s2t09 Space.mp3"
+  },
+  {
+    "identifier": "gd1991-03-29.142237.sbd.ultramatrix.miller.flac2496",
+    "date": "1991-03-29",
+    "venue": "Nassau Coliseum",
+    "location": "Uniondale, NY",
+    "filename": "16Space.mp3"
+  },
+  {
+    "identifier": "gd1991-04-07.150455.s2.mtx.seamons.flac16",
+    "date": "1991-04-07",
+    "venue": "Orlando Arena",
+    "location": "Orlando, FL",
+    "filename": "gd91-04-07d3t01.mp3"
+  },
+  {
+    "identifier": "gd1991-04-09.154480.UltraMatrix.sbd.cm.miller.t.flac16",
+    "date": "1991-04-09",
+    "venue": "Orlando Arena",
+    "location": "Orlando, FL",
+    "filename": "14 Space.mp3"
+  },
+  {
+    "identifier": "gd1991-05-10.166598.mtx.seamons.ht167.flac1644",
+    "date": "1991-05-10",
+    "venue": "Shoreline Amphitheatre, Mountain View, CA",
+    "location": "Mountain View, CA",
+    "filename": "gd91-05-10d3t01.mp3"
+  },
+  {
+    "identifier": "gd1993-03-14.136408.Nak300CP4.Baker.Keo.Flac1644",
+    "date": "1993-03-14",
+    "venue": "Richfield Coliseum",
+    "location": "Richfield, OH",
+    "filename": "gd1993-03-14.Nak300.t15.mp3"
+  },
+  {
+    "identifier": "gd1993-03-17.138877.AMS.ST-250.S2.Ammons.Noel.t-flac16",
+    "date": "1993-03-17",
+    "venue": "Capital Centre",
+    "location": "Landover, MD",
+    "filename": "gd93-03-17.s2t07.mp3"
+  },
+  {
+    "identifier": "gd1993-03-17.akg451.cdipietro.31957.flac16",
+    "date": "1993-03-17",
+    "venue": "Capital Centre",
+    "location": "Landover , MD",
+    "filename": "gd1993-03-17d3t01.mp3"
+  },
+  {
+    "identifier": "gd1983-06-28.135355.Unk-Hill.Keo.Flac2496",
+    "date": "1983-06-28",
+    "venue": "Poplar Creek Music Theatre",
+    "location": "Hoffman Estates, IL",
+    "filename": "gd1983-06-28.Aud.t17.mp3"
+  },
+  {
+    "identifier": "gd1985-06-30.at835-d12e.Ackerman-Taraszki.102134.flac16",
+    "date": "1985-06-30",
+    "venue": "Merriweather Post Pavilion",
+    "location": "Columbia, MD",
+    "filename": "gd1985-06-30s2t07.mp3"
+  },
+  {
+    "identifier": "gd1985-09-05.142290.pp-aud.darby.tobin.flac2448",
+    "date": "1985-09-05",
+    "venue": "Red Rocks Amphitheatre",
+    "location": "Morrison, CO",
+    "filename": "gd1985-09-05s2t07.mp3"
+  },
+  {
+    "identifier": "gd1985-07-13.133534.aud.Holtz.NakCM104.flac2496",
+    "date": "1985-07-13",
+    "venue": "Ventura County Fairgrounds",
+    "location": "Ventura, CA",
+    "filename": "d2t05.mp3"
+  },
+  {
+    "identifier": "gd1986-03-24.aud.cirella.kerbel.5570.shnf",
+    "date": "1986-03-24",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "gd1986-03-24d2t05.mp3"
+  },
+  {
+    "identifier": "gd1986-04-03.nak304.suraci.77346.flac16",
+    "date": "1986-04-03",
+    "venue": "Hartford Civic Center",
+    "location": "Hartford, CT",
+    "filename": "gd1986-04-03d3t01.mp3"
+  },
+  {
+    "identifier": "gd1986-05-04.148868.neumann.km84i.hecht.miller.clugston.flac1648",
+    "date": "1986-05-04",
+    "venue": "Cal Expo Amphitheatre",
+    "location": "Sacramento, CA",
+    "filename": "gd86-05-04 s2t05 Space.mp3"
+  },
+  {
+    "identifier": "gd1986-05-04.Senn421sNak300CP4s.Darby.119545.Flac2448",
+    "date": "1986-05-04",
+    "venue": "Cal Expo Amphitheatre",
+    "location": "Sacramento, CA",
+    "filename": "gd1986-05-04.Senn421Nak300.t14.mp3"
+  },
+  {
+    "identifier": "gd1986-06-20.148477.neumann.km84i.hecht.miller.clugston.flac2496",
+    "date": "1986-06-20",
+    "venue": "Greek Theatre, University Of California",
+    "location": "Berkeley, CA",
+    "filename": "gd86-06-20 s2t06 Space.mp3"
+  },
+  {
+    "identifier": "gd1987-06-13.senn421-nak300.alexander.tetzeli.77185.sbefail.flac16",
+    "date": "1987-06-13",
+    "venue": "Ventura County Fairgrounds",
+    "location": "Ventura, CA",
+    "filename": "gd87-06-13d3t01.mp3"
+  },
+  {
+    "identifier": "gd1987-08-15.nak300.pasternak.112718.flac2448",
+    "date": "1987-08-15",
+    "venue": "Town Park",
+    "location": "Telluride, CO",
+    "filename": "gd1987-08-15s2t06.mp3"
+  },
+  {
+    "identifier": "gd1987-08-22.142139.sbd.ultramatrix.pcm.miller.flac1644",
+    "date": "1987-08-22",
+    "venue": "Calaveras Co. Fairgrounds",
+    "location": "Angel's Camp, CA",
+    "filename": "18Space.mp3"
+  },
+  {
+    "identifier": "gd1988-04-08.140489.prefm.lamarre.berger.flac1644",
+    "date": "1988-04-08",
+    "venue": "The Centrum",
+    "location": "Worcester, MA",
+    "filename": "gd1988-04-08s2t05.mp3"
+  },
+  {
+    "identifier": "gd1988-04-09.140490.prefm.lamarre.berger.flac1644",
+    "date": "1988-04-09",
+    "venue": "The Centrum",
+    "location": "Worcester, MA",
+    "filename": "gd1988-04-09s2t06.mp3"
+  },
+  {
+    "identifier": "gd1988-06-26.163567.senn.me80.hessberg.miller.clugston.flac1648",
+    "date": "1988-06-26",
+    "venue": "Civic Arena",
+    "location": "Pittsburgh, PA",
+    "filename": "gd88-06-26 s2t07 Space.mp3"
+  },
+  {
+    "identifier": "gd1988-09-14.134429.dts.tobin.flac16",
+    "date": "1988-09-14",
+    "venue": "Madison Square Garden",
+    "location": "New York, NY",
+    "filename": "gd1988-09-14d3t01.mp3"
+  },
+  {
+    "identifier": "gd1988-10-16.senn.mccue.ford.28478.sbeok.flac16",
+    "date": "1988-10-16",
+    "venue": "Bayfront Center",
+    "location": "St. Petersburg , FL",
+    "filename": "gd1988-10-16d3t01.mp3"
+  },
+  {
+    "identifier": "gd1989-04-16.nak.rickers.112742.flac16",
+    "date": "1989-04-16",
+    "venue": "The Mecca",
+    "location": "Milwaukee, WI",
+    "filename": "gd1989-04-16s2t06.mp3"
+  },
+  {
+    "identifier": "gd1989-09-30.142503.schoeps.cmc4.mk2s.mattes.miller.clugston.flac1648",
+    "date": "1989-09-30",
+    "venue": "Shoreline Amphitheatre",
+    "location": "Mountain View, CA",
+    "filename": "Gd89-09-30T14Space.mp3"
+  },
+  {
+    "identifier": "gd1989-10-09.099647",
+    "date": "1989-10-09",
+    "venue": "Hampton Coliseum",
+    "location": "Hampton, VA",
+    "filename": "gd1989-10-09.db.s2.t06.mp3"
+  },
+  {
+    "identifier": "gd1989-10-18.142562.fob.schoeps.cmc4.mk4.mattes.miller.clugston.flac1648",
+    "date": "1989-10-18",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "Gd89-10-18S2t08Space.mp3"
+  },
+  {
+    "identifier": "gd1989-10-20.dts.tobin.123591.flac16",
+    "date": "1989-10-20",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "gd1989-10-20d3t01.mp3"
+  },
+  {
+    "identifier": "gd1989-12-06.sbd.aquafredda.7446.shnf",
+    "date": "1989-12-06",
+    "venue": "Oakland-Alameda County Coliseum Arena",
+    "location": "Oakland, CA",
+    "filename": "gd89-12-06d3t01.mp3"
+  },
+  {
+    "identifier": "gd1990-06-08.fob.alabamabob.andrewf.95184.flac16",
+    "date": "1990-06-08",
+    "venue": "Cal Expo Amphitheatre",
+    "location": "Sacramento, CA",
+    "filename": "gd1990-06-08d2t04.mp3"
+  },
+  {
+    "identifier": "gd1990-07-14.sbd.unknown.84979.shnf",
+    "date": "1990-07-14",
+    "venue": "Foxboro Stadium",
+    "location": "Foxboro, MA",
+    "filename": "gd90-07-14d3t02.mp3"
+  },
+  {
+    "identifier": "gd1991-03-21.nak550.cohen.109365.sbeok.flac16",
+    "date": "1991-03-21",
+    "venue": "Capital Centre",
+    "location": "Landover, MD",
+    "filename": "gd91-03-21d3t02.mp3"
+  },
+  {
+    "identifier": "gd1991-02-21.pzm.russjcan.93842.sbeok.flac16",
+    "date": "1991-02-21",
+    "venue": "Oakland-Alameda County Coliseum Stadium",
+    "location": "Oakland, CA",
+    "filename": "gd1991.02.21.d3t01.mp3"
+  },
+  {
+    "identifier": "gd1991-03-20.132416.Nak300sSenn441s.Fitzy.Keo.Flac1644",
+    "date": "1991-03-20",
+    "venue": "Capital Centre",
+    "location": "Landover, MD",
+    "filename": "gd1991-03-20.4MicMix.t15.mp3"
+  },
+  {
+    "identifier": "gd1991-04-01.nak300.bleich-sirmick.109943.sbeok.flac16",
+    "date": "1991-04-01",
+    "venue": "Greensboro Coliseum",
+    "location": "Greensboro, NC",
+    "filename": "gd1991-04-01d2t05.mp3"
+  },
+  {
+    "identifier": "gd1991-08-12.sbd.hinko.29496.sbeok.flacf",
+    "date": "1991-08-12",
+    "venue": "Cal Expo",
+    "location": "Sacramento, CA",
+    "filename": "gd1991-08-12d3t01.mp3"
+  },
+  {
+    "identifier": "gd1991-09-20.AKG451.Currier.Keo.124201.Flac2496",
+    "date": "1991-09-20",
+    "venue": "Boston Garden",
+    "location": "Boston, MA",
+    "filename": "gd1991-09-20.AKG451.t16.mp3"
+  },
+  {
+    "identifier": "gd1993-06-22.154313.senn441.greenberg.miller.clugston.flac1648",
+    "date": "1993-06-22",
+    "venue": "Deer Creek Music Center",
+    "location": "Noblesville, IN",
+    "filename": "gd93-06-22 s2t06 Space.mp3"
+  },
+  {
+    "identifier": "gd85-09-03.beyer.agan.1681.sbefail.shnf",
+    "date": "1985-09-03",
+    "venue": "Starlight Theater",
+    "location": "Kansas City, MO",
+    "filename": "gd85-09-03d2t07.mp3"
+  },
+  {
+    "identifier": "gd91-04-09.sbd.ingle.10061.sbeok.shnf",
+    "date": "1991-04-09",
+    "venue": "Orlando Arena",
+    "location": "Orlando, FL",
+    "filename": "gd1991-04-09d2t04.mp3"
+  },
+  {
+    "identifier": "gd91-09-04.fob-schoeps-oneill.miller.28404.sbeok.shnf",
+    "date": "1991-09-04",
+    "venue": "Richfield Coliseum",
+    "location": "Richfield, OH",
+    "filename": "gd91-09-04d3t01.mp3"
+  },
+  {
+    "identifier": "gd1991-02-21.fob.bk4011.unknown.GEMS.93474.flac16",
+    "date": "1991-02-21",
+    "venue": "Oakland-Alameda County Coliseum Stadium",
+    "location": "Oakland, CA",
+    "filename": "gd91-02-21.GEMS.d3t01.mp3"
+  },
+  {
+    "identifier": "gd1985-04-04.124813.chasingwilma.flac24",
+    "date": "1985-04-04",
+    "venue": "Providence Civic Center",
+    "location": "Providence, RI",
+    "filename": "gd1985-04-04-24bits02t07.mp3"
+  },
+  {
+    "identifier": "gd1987-09-19.134126.dts.tobin.flac16",
+    "date": "1987-09-19",
+    "venue": "Madison Square Garden",
+    "location": "New York, NY",
+    "filename": "gd1987-09-19d3t01.mp3"
+  },
+  {
+    "identifier": "gd1985-11-02.senn421s.nak300s.alexander.77906.flac24",
+    "date": "1985-11-02",
+    "venue": "Richmond Coliseum",
+    "location": "Richmond, VA",
+    "filename": "gd85-11-02set2t07.mp3"
+  },
+  {
+    "identifier": "gd-1995-03-17MVBtapes",
+    "date": "1995-03-17",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "GD1995-03-17 10. Space.mp3"
+  },
+  {
+    "identifier": "gd1973-03-24.sbd.cantor.deibert.83407.sbeok.flac16",
+    "date": "1973-03-24",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "gd1973-03-24d2t04.mp3"
+  },
+  {
+    "identifier": "gd1978-01-18.170169.sony.ecm270.menke.miller.clugston.flac2496",
+    "date": "1978-01-18",
+    "venue": "Stockton Civic Auditorium",
+    "location": "Stockton, CA",
+    "filename": "gd78-01-18 s2t05 Space.mp3"
+  },
+  {
+    "identifier": "gd1978-04-16.149552.BettyBoard.Anon.Noel.t-flac16",
+    "date": "1978-04-16",
+    "venue": "Huntington Civic Center",
+    "location": "Huntington, WV",
+    "filename": "gd78-04-16.s2t07.mp3"
+  },
+  {
+    "identifier": "gd1978-10-17.138919.sbd.gastwirt.miller.sirmick.138919.sbeok.flac16",
+    "date": "1978-10-17",
+    "venue": "Winterland Arena",
+    "location": "San Francisco, CA",
+    "filename": "gd1978-10-17s2t08.mp3"
+  },
+  {
+    "identifier": "gd1979-01-15.167728.ShureSM57.Sublette.noel.goldey.t-flac2496",
+    "date": "1979-01-15",
+    "venue": "Springfield Civic Center",
+    "location": "Springfield, MA",
+    "filename": "gd79-01-15.s2t08.mp3"
+  },
+  {
+    "identifier": "gd1979-06-30.152216.senn.blend.eaton.miiller.clugston.flac2496",
+    "date": "1979-06-30",
+    "venue": "Portland International Speedway",
+    "location": "Portland, OR",
+    "filename": "gd79-06-30 s2t09 Space.mp3"
+  },
+  {
+    "identifier": "gd1979-07-01.156177.mtx.tobin.flac16",
+    "date": "1979-07-01",
+    "venue": "Seattle Center Coliseum",
+    "location": "Seattle, WA",
+    "filename": "17 Space.mp3"
+  },
+  {
+    "identifier": "gd1979-12-07.sbd.miller.23682.sbeok.shnf",
+    "date": "1979-12-07",
+    "venue": "Indiana Convention Center",
+    "location": "Indianapolis, IN",
+    "filename": "gd79-12-07d2t06.mp3"
+  },
+  {
+    "identifier": "gd1979-12-10.126986.mtx.dusborne.flac16",
+    "date": "1979-12-10",
+    "venue": "Soldiers' and Sailors' Memorial Hall",
+    "location": "Kansas City, KS",
+    "filename": "gd79-12-10s2t09.mp3"
+  },
+  {
+    "identifier": "gd1979-12-26.128505.naks.mason.set2.flac16",
+    "date": "1979-12-26",
+    "venue": "Oakland Auditorium Arena",
+    "location": "Oakland, CA",
+    "filename": "gd79-12-26.s2t06.mp3"
+  },
+  {
+    "identifier": "gd1979-12-27.128618.naks.mason.flac16",
+    "date": "1979-12-27",
+    "venue": "Oakland Auditorium Arena",
+    "location": "Oakland, CA",
+    "filename": "gd79-12-27.s2t10.mp3"
+  },
+  {
+    "identifier": "gd1979-11-24.sbd.miller.113499.flac16",
+    "date": "1979-11-24",
+    "venue": "Golden Hall, Community Concourse",
+    "location": "San Diego, CA",
+    "filename": "gd79-11-24d3t01.mp3"
+  },
+  {
+    "identifier": "gd1979-08-05.173887.mtx.tobin.flac2496",
+    "date": "1979-08-05",
+    "venue": "Oakland Auditorium Arena",
+    "location": "Oakland, CA",
+    "filename": "17 Space.mp3"
+  },
+  {
+    "identifier": "gd1979-08-14.152252.senn.blend.eaton.miller.clugston.flac2496",
+    "date": "1979-08-14",
+    "venue": "McNichols Sports Arena",
+    "location": "Denver, CO",
+    "filename": "gd79-08-14 s2t08 Space.mp3"
+  },
+  {
+    "identifier": "gd1980-05-11.152441.beyer201-prescott.holbrook.flac2448",
+    "date": "1980-05-11",
+    "venue": "Cumberland County Civic Center",
+    "location": "Portland, ME",
+    "filename": "gd1980-05-11beyer201prescotts2t07.mp3"
+  },
+  {
+    "identifier": "gd1980-05-11.nak300.friend.andrewf.107226.flac24",
+    "date": "1980-05-11",
+    "venue": "Cumberland County Civic Center",
+    "location": "Portland, ME",
+    "filename": "gd1980-05-11s2t09.mp3"
+  },
+  {
+    "identifier": "gd1980-05-11.sbd.terrapinstation.12259.sbeok.shnf",
+    "date": "1980-05-11",
+    "venue": "Cumberland County Civic Center",
+    "location": "Portland, ME",
+    "filename": "gd1980-05-11d2t07.mp3"
+  },
+  {
+    "identifier": "gd1980-06-07.155700.akg.se5.wiseman.miller.clugston.flac1648",
+    "date": "1980-06-07",
+    "venue": "Folsom Field, University Of Colorado",
+    "location": "Boulder, CO",
+    "filename": "gd80-06-07 s2t08 Space.mp3"
+  },
+  {
+    "identifier": "gd1980-06-21.sbd.miller.113302.flac16",
+    "date": "1980-06-21",
+    "venue": "West High Auditorium",
+    "location": "Anchorage, AK",
+    "filename": "gd80-06-21d2t06.mp3"
+  },
+  {
+    "identifier": "gd1980-08-29.nak300.morris.102013.sbeok.flac16",
+    "date": "1980-08-29",
+    "venue": "The Spectrum",
+    "location": "Philadelphia, PA",
+    "filename": "gd80-08-29audd3t01.mp3"
+  },
+  {
+    "identifier": "gd1980-08-31.144288.fob.nak700.cohen.miller.clugston.flac1648",
+    "date": "1980-08-31",
+    "venue": "Capital Centre",
+    "location": "Landover, MD",
+    "filename": "Gd80-08-31S2t09Space.mp3"
+  },
+  {
+    "identifier": "gd1980-09-02.mtx.sirmick.110785.sbeok.flac16",
+    "date": "1980-09-02",
+    "venue": "Community War Memorial Auditorium",
+    "location": "Rochester, NY",
+    "filename": "gd1980-09-02d3t01.mp3"
+  },
+  {
+    "identifier": "gd1980-09-02.nak300.friend.andrewf.102776.flac16",
+    "date": "1980-09-02",
+    "venue": "Community War Memorial Auditorium",
+    "location": "Rochester, NY",
+    "filename": "gd1980-09-02s2t09.mp3"
+  },
+  {
+    "identifier": "gd1980-09-04.163391.fob-sonyECM280.wise-claridge.minches.flac1648",
+    "date": "1980-09-04",
+    "venue": "Providence Civic Center",
+    "location": "Providence, RI",
+    "filename": "gd1980-09-04s2t08.mp3"
+  },
+  {
+    "identifier": "gd1980-09-06.nak300.friend.andrewf.101684.flac24",
+    "date": "1980-09-06",
+    "venue": "State Fairgrounds",
+    "location": "Lewiston, ME",
+    "filename": "gd1980-09-06s2t10.mp3"
+  },
+  {
+    "identifier": "gd1980-09-27.144698.nak700.severson.miller.clugston.flac1648",
+    "date": "1980-09-27",
+    "venue": "Warfield Theater",
+    "location": "San Francisco, CA",
+    "filename": "Gd80-09-27S3t07Space.mp3"
+  },
+  {
+    "identifier": "gd1980-09-27.155900.akg.se5.wiseman.miller.clugston.flac1648",
+    "date": "1980-09-27",
+    "venue": "Warfield Theater",
+    "location": "San Francisco, CA",
+    "filename": "gd80-09-27 s3t05 Other One_Space.mp3"
+  },
+  {
+    "identifier": "gd1980-10-31.141354.sbd.pcm.dalton.miller.clugston.flac1644",
+    "date": "1980-10-31",
+    "venue": "Radio City Music Hall",
+    "location": "New York, NY",
+    "filename": "Gd80-10-31T25Space.mp3"
+  },
+  {
+    "identifier": "gd1980-10-31.nak700.rolfe.miller.94270.sbeok.flac16",
+    "date": "1980-10-31",
+    "venue": "Radio City Music Hall",
+    "location": "New York, NY",
+    "filename": "gd80-10-31d3t01.mp3"
+  },
+  {
+    "identifier": "gd1981-03-02.139733.fob.nak700.streeter.miller.clugston.flac1644",
+    "date": "1981-03-02",
+    "venue": "Cleveland Music Hall",
+    "location": "Cleveland, OH",
+    "filename": "Gd81-03-02S2T07Space.mp3"
+  },
+  {
+    "identifier": "gd1980-11-26.135530.sbd.miller.fkac16",
+    "date": "1980-11-26",
+    "venue": "The Sportatorium",
+    "location": "Pembroke Pines, FL",
+    "filename": "gd80-11-26d3t01.mp3"
+  },
+  {
+    "identifier": "gd1980-11-26.sbd.clugston-edited.patched.82278.shnf",
+    "date": "1980-11-26",
+    "venue": "The Sportatorium",
+    "location": "Pembroke Pines, FL",
+    "filename": "gd80-11-26d2t07.mp3"
+  },
+  {
+    "identifier": "gd1980-11-28.nak700.kocky.76519.sbeok.flac16",
+    "date": "1980-11-28",
+    "venue": "Lakeland Civic Center",
+    "location": "Lakeland, FL",
+    "filename": "gd1980-11-28d2t05.mp3"
+  },
+  {
+    "identifier": "gd1980-11-29.nak700.wagner.miller.90104.sbeok.flac16",
+    "date": "1980-11-29",
+    "venue": "Alligator Alley Gym - University of Florida",
+    "location": "Gainesville, FL",
+    "filename": "gd80-11-29d3t01.mp3"
+  },
+  {
+    "identifier": "gd1981-03-13.140010.FOB-akg-d330bt.streeter.miller.sirmick.flac2496",
+    "date": "1981-03-13",
+    "venue": "Utica Memorial Auditorium",
+    "location": "Utica, NY",
+    "filename": "gd1981-03-13s2t08.mp3"
+  },
+  {
+    "identifier": "gd1981-05-09.148947.nak700.severson.miller.clugston.flac1648",
+    "date": "1981-05-09",
+    "venue": "Nassau Veterans Memorial Coliseum",
+    "location": "Uniondale, NY",
+    "filename": "gd81-05-09 s2t08 Space.mp3"
+  },
+  {
+    "identifier": "gd1981-05-11.mtx.seamons.107252.flac16",
+    "date": "1981-05-11",
+    "venue": "Veterans' Memorial Coliseum",
+    "location": "New Haven, CT",
+    "filename": "gd81-05-11d3t01.mp3"
+  },
+  {
+    "identifier": "gd1981-05-17.nak300.mow.ford.27974.sbeok.flac16",
+    "date": "1981-05-17",
+    "venue": "Onondaga Auditorium",
+    "location": "Syracuse, NY",
+    "filename": "gd1981-05-17d3t02.mp3"
+  },
+  {
+    "identifier": "gd1981-07-07.mtx.sirmick.110637.sbeok.flac16",
+    "date": "1981-07-07",
+    "venue": "Kansas City Municipal Auditorium Arena",
+    "location": "Kansas City, MO",
+    "filename": "gd1981-07-07d3t01.mp3"
+  },
+  {
+    "identifier": "gd1981-07-10.137694.s2.nak700.schley.flac1644",
+    "date": "1981-07-10",
+    "venue": "St. Paul Civic Center",
+    "location": "St. Paul, MN",
+    "filename": "gd1981-07-10s2t06.mp3"
+  },
+  {
+    "identifier": "gd1981-08-30.sbd.miller.fishman.repitch-30118.78602.sbefail.flac16",
+    "date": "1981-08-30",
+    "venue": "Compton Terrace Amphitheatre",
+    "location": "Tempe, AZ",
+    "filename": "gd81-08-30d3t01.mp3"
+  },
+  {
+    "identifier": "gd1981-12-27.143468.sbd.healy.miller.clugston.flac1648",
+    "date": "1981-12-27",
+    "venue": "Oakland Auditorium Arena",
+    "location": "Oakland, CA",
+    "filename": "Gd81-12-27S2t05Space.mp3"
+  },
+  {
+    "identifier": "gd1982-05-21.nak700.wagner.miller.109334.flac16",
+    "date": "1982-05-21",
+    "venue": "Greek Theatre, U. Of California",
+    "location": "Berkeley, CA",
+    "filename": "gd82-05-21d2t05.mp3"
+  },
+  {
+    "identifier": "gd1982-05-23.nak700.wagner.miller.109969.flac16",
+    "date": "1982-05-23",
+    "venue": "Greek Theatre, Univ. of California",
+    "location": "Berkeley, CA",
+    "filename": "gd82-05-23d3t01.mp3"
+  },
+  {
+    "identifier": "gd1982-05-23.sbd.miller.96332.sbeok.flac16",
+    "date": "1982-05-23",
+    "venue": "Greek Theatre - University of California",
+    "location": "Berkeley, CA",
+    "filename": "gd82-05-23d3t01.mp3"
+  }
+]
